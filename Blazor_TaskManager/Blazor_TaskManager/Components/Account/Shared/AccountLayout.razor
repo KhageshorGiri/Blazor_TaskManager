@@ -1,5 +1,4 @@
 ﻿@inherits LayoutComponentBase
-@layout Blazor_TaskManager.Components.Layout.MainLayout
 @inject NavigationManager NavigationManager
 
 @if (HttpContext is null)
@@ -8,7 +7,10 @@
 }
 else
 {
-    @Body
+    <div class="container">
+        @Body
+
+    </div>
 }
 
 @code {

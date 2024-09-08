@@ -10,59 +10,110 @@
 @inject NavigationManager NavigationManager
 @inject IdentityRedirectManager RedirectManager
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
 <PageTitle>Log in</PageTitle>
 
-<h1>Log in</h1>
-<div class="row">
+
+<style>
+    .anchor-tag {
+        text-decoration: none;
+    }
+
+    body {
+        background-color: rebeccapurple;
+    }
+
+</style>
+
+
+<div class="row d-flex justify-content-center align-items-center min-vh-100">
     <div class="col-md-4">
-        <section>
-            <StatusMessage Message="@errorMessage" />
-            <EditForm Model="Input" method="post" OnValidSubmit="LoginUser" FormName="login">
-                <DataAnnotationsValidator />
-                <h2>Use a local account to log in.</h2>
-                <hr />
-                <ValidationSummary class="text-danger" role="alert" />
-                <div class="form-floating mb-3">
-                    <InputText @bind-Value="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
-                    <label for="email" class="form-label">Email</label>
-                    <ValidationMessage For="() => Input.Email" class="text-danger" />
+        <div class="card shadow-lg p-3">
+            <div class="card-body">
+                <div class="row">
+                    <h4 class="text-center">Welcome Back!</h4>
                 </div>
-                <div class="form-floating mb-3">
-                    <InputText type="password" @bind-Value="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="password" />
-                    <label for="password" class="form-label">Password</label>
-                    <ValidationMessage For="() => Input.Password" class="text-danger" />
+                <div class="row mt-3">
+
+                    <section>
+                        <StatusMessage Message="@errorMessage" />
+                        <EditForm Model="Input" method="post" OnValidSubmit="LoginUser" FormName="login">
+                            <DataAnnotationsValidator />
+                            <ValidationSummary class="text-danger" role="alert" />
+                            <div class="form-group mb-4">
+                                <InputText type="text" id="email" class="form-control" @bind-Value="Input.Email"
+                                           autocomplete="username" aria-required="true" placeholder="username@example.com" />
+                                <ValidationMessage For="() => Input.Email" class="text-danger" />
+                            </div>
+
+                            <div class="form-group mb-4 position-relative">
+                                <InputText type="password" id="password" class="form-control" @bind-Value="Input.Password"
+                                           autocomplete="current-password" aria-required="true" placeholder="password" />
+                                <span class="position-absolute top-50 end-0 translate-middle-y me-3"
+                                      onclick="togglePasswordVisibility()" style="cursor: pointer; z-index:2;">
+                                    <i class="bi bi-eye-slash" id="togglePasswordIcon"></i>
+                                </span>
+                                <ValidationMessage For="() => Input.Password" class="text-danger" />
+                            </div>
+
+                            <div class="checkbox mb-4">
+                                <label class="form-label">
+                                    <InputCheckbox @bind-Value="Input.RememberMe" class="darker-border-checkbox form-check-input" />
+                                    Remember me
+                                </label>
+
+                                <p class="text-center">
+                                    <a href="Account/ForgotPassword" class="anchor-tag p-0">Forgot your password?</a>
+                                </p>
+                            </div>
+                            <div>
+                                <button type="submit" class="w-100 btn btn-primary">Log in</button>
+                            </div>
+                            <div class="row mt-4">
+                                <label class="col-md-12">
+                                    <span>Dotn't have an account? </span>
+                                    <a href="@(NavigationManager.GetUriWithQueryParameters("Account/Register",
+                                       new Dictionary<string, object?> { ["ReturnUrl"] = ReturnUrl }))"
+                                       class="anchor-tag p-0">Register</a>
+                                </label>
+                                <label class="col-md-12 mt-1" hidden>
+                                    <a href="Account/ResendEmailConfirmation" class="anchor-tag p-0">Resend email confirmation</a>
+                                </label>
+                            </div>
+                            <div class="row my-3"> <span class="text-center">or</span></div>
+                            <div class="row">
+
+                                <button type="button" class="w-100 btn btn-outline-info">
+                                    <i class="bi bi-google me-2"></i> <span class="text-center">Log in with Google</span>
+                                </button>
+                            </div>
+
+                        </EditForm>
+                    </section>
                 </div>
-                <div class="checkbox mb-3">
-                    <label class="form-label">
-                        <InputCheckbox @bind-Value="Input.RememberMe" class="darker-border-checkbox form-check-input" />
-                        Remember me
-                    </label>
-                </div>
-                <div>
-                    <button type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
-                </div>
-                <div>
-                    <p>
-                        <a href="Account/ForgotPassword">Forgot your password?</a>
-                    </p>
-                    <p>
-                        <a href="@(NavigationManager.GetUriWithQueryParameters("Account/Register", new Dictionary<string, object?> { ["ReturnUrl"] = ReturnUrl }))">Register as a new user</a>
-                    </p>
-                    <p>
-                        <a href="Account/ResendEmailConfirmation">Resend email confirmation</a>
-                    </p>
-                </div>
-            </EditForm>
-        </section>
-    </div>
-    <div class="col-md-6 col-md-offset-2">
-        <section>
-            <h3>Use another service to log in.</h3>
-            <hr />
-            <ExternalLoginPicker />
-        </section>
+            </div>
+        </div>
     </div>
 </div>
+
+
+<script>
+    function togglePasswordVisibility() {
+        const passwordField = document.getElementById('password');
+        const toggleIcon = document.getElementById('togglePasswordIcon');
+
+        if (passwordField.type === 'password') {
+            passwordField.type = 'text';
+            toggleIcon.classList.remove('bi-eye-slash');
+            toggleIcon.classList.add('bi-eye');
+        } else {
+            passwordField.type = 'password';
+            toggleIcon.classList.remove('bi-eye');
+            toggleIcon.classList.add('bi-eye-slash');
+        }
+    }
+</script>
 
 @code {
     private string? errorMessage;

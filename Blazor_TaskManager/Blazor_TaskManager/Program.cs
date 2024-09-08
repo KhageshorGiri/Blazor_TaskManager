@@ -1,6 +1,8 @@
 ﻿using Blazor_TaskManager.Components;
 using Blazor_TaskManager.Components.Account;
 using Blazor_TaskManager.Data;
+using Blazor_TaskManager.Services;
+using Blazor_TaskManager.Services.Interfaces;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -36,6 +38,9 @@ builder.Services.AddIdentityCore<TaskManagerUser>(options => options.SignIn.Requ
     .AddDefaultTokenProviders();
 
 builder.Services.AddSingleton<IEmailSender<TaskManagerUser>, IdentityNoOpEmailSender>();
+
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+
 
 var app = builder.Build();
 

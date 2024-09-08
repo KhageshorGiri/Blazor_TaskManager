@@ -17,40 +17,69 @@
 
 <PageTitle>Register</PageTitle>
 
-<h1>Register</h1>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-<div class="row">
+<style>
+    .anchor-tag {
+        text-decoration: none;
+    }
+
+    body {
+        background-color: rebeccapurple;
+    }
+
+</style>
+
+<div class="row d-flex justify-content-center align-items-center min-vh-100">
     <div class="col-md-4">
-        <StatusMessage Message="@Message" />
-        <EditForm Model="Input" asp-route-returnUrl="@ReturnUrl" method="post" OnValidSubmit="RegisterUser" FormName="register">
-            <DataAnnotationsValidator />
-            <h2>Create a new account.</h2>
-            <hr />
-            <ValidationSummary class="text-danger" role="alert" />
-            <div class="form-floating mb-3">
-                <InputText @bind-Value="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
-                <label for="email">Email</label>
-                <ValidationMessage For="() => Input.Email" class="text-danger" />
+        <div class="card shadow-lg p-3">
+            <div class="card-body">
+                <div class="row">
+                    <h4 class="text-center">Sign Up</h4>
+                </div>
+                <div class="row mt-3">
+                    <section>
+                        <StatusMessage Message="@Message" />
+                        <EditForm Model="Input" asp-route-returnUrl="@ReturnUrl" method="post" OnValidSubmit="RegisterUser" FormName="register">
+                            <DataAnnotationsValidator />
+                            <div class="form-group mb-3">
+                                <InputText @bind-Value="Input.Email" class="form-control" autocomplete="username"
+                                           aria-required="true" placeholder="username@example.com" />
+                                <ValidationMessage For="() => Input.Email" class="text-danger" />
+                            </div>
+                            <div class="form-group mb-3">
+                                <InputText type="password" @bind-Value="Input.Password" class="form-control"
+                                           autocomplete="new-password" aria-required="true" placeholder="password" />
+                                <ValidationMessage For="() => Input.Password" class="text-danger" />
+                            </div>
+                            <div class="form-group mb-3">
+                                <InputText type="password" @bind-Value="Input.ConfirmPassword" class="form-control"
+                                           autocomplete="new-password" aria-required="true" placeholder="conform password" />
+                                <ValidationMessage For="() => Input.ConfirmPassword" class="text-danger" />
+                            </div>
+                            <button type="submit" class="w-100 btn btn-primary">Register</button>
+                        </EditForm>
+                    </section>
+                </div>
+                <div class="row mt-4">
+                    <label class="col-md-12">
+                        <span>Already have an account? </span>
+                        <a href="/Account/Login"
+                           class="anchor-tag p-0">Login</a>
+                    </label>
+                    <label class="col-md-12 mt-1" hidden>
+                        <a href="Account/ResendEmailConfirmation" class="anchor-tag p-0">Resend email confirmation</a>
+                    </label>
+                </div>
+                <div class="row my-3"> <span class="text-center">or</span></div>
+                <div class="row">
+
+                    <button type="button" class="w-100 btn btn-outline-info">
+                        <i class="bi bi-google me-2"></i> <span class="text-center">Log in with Google</span>
+                    </button>
+                </div>
             </div>
-            <div class="form-floating mb-3">
-                <InputText type="password" @bind-Value="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                <label for="password">Password</label>
-                <ValidationMessage For="() => Input.Password" class="text-danger" />
-            </div>
-            <div class="form-floating mb-3">
-                <InputText type="password" @bind-Value="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                <label for="confirm-password">Confirm Password</label>
-                <ValidationMessage For="() => Input.ConfirmPassword" class="text-danger" />
-            </div>
-            <button type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
-        </EditForm>
-    </div>
-    <div class="col-md-6 col-md-offset-2">
-        <section>
-            <h3>Use another service to register.</h3>
-            <hr />
-            <ExternalLoginPicker />
-        </section>
+        </div>
     </div>
 </div>
 
