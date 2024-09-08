@@ -1,4 +1,4 @@
-﻿namespace Blazor_TaskManager.Data.Enums;
+﻿namespace Blazor_TaskManager.Entities.Enums;
 
 public enum PriorityOptionType
 {

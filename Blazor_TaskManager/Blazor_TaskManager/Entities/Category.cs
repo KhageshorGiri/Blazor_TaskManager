@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Blazor_TaskManager.Data;
+namespace Blazor_TaskManager.Entities;
 
 public class Category
 {

@@ -1,8 +1,8 @@
-﻿using Blazor_TaskManager.Data.Enums;
+﻿using Blazor_TaskManager.Entities.Enums;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Blazor_TaskManager.Data;
+namespace Blazor_TaskManager.Entities;
 
 public class TaskItem
 {
