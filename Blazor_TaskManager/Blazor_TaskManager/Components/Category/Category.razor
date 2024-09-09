@@ -1,4 +1,53 @@
 ﻿
 @page "/categories"
 
-<h3>Category</h3>
+<div class="row">
+    <div class="d-flex justify-content-end">
+        <button type="button" id="addNewCategoryBtn" class="btn btn-sm btn-primary"
+                data-bs-toggle="modal" data-bs-target="#addNewCategoryModel">
+            <i class="bi bi-plus-circle"></i>  Add New Category
+        </button>
+    </div>
+</div>
+
+<div class="card shadow-lg p-3 mt-3">
+    <div class="card-body">
+        <table class="table table-sm table-striped table-hover" id="CategoryIndexTable">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Category</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="addNewCategoryModel" data-bs-backdrop="static"
+     data-bs-keyboard="false" tabindex="-1" aria-labelledby="addNewCategoryModelLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="addNewCategoryModelLabel"> <i class="bi bi-plus-circle"></i> Add New Category</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h1>Here is form</h1>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-success">Save</button>
+                <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
