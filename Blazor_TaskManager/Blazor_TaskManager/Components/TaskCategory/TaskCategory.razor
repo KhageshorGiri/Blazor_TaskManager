@@ -46,12 +46,21 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <h1>Here is form</h1>
+                <EditForm method="post" Model="Category" OnInvalidSubmit="AddNewCatgory" FormName="AddNewCategory" Enhance>
+                    <DataAnnotationsValidator />
+                    <ValidationSummary class="text-danger"/>
+                    <div class="form-group">
+                        <label for="name" class="form-label">Category Name</label>
+                        <InputText id="name" @bind-Value="Category.Name" class="form-control" />
+                        <ValidationMessage For="() => Category.Name" class="text-danger"/>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-sm btn-success">Save</button>
+                        <button type="reset" class="btn btn-sm btn-secondary">clear</button>
+                    </div>
+                </EditForm>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-success">Save</button>
-                <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
+           
         </div>
     </div>
 </div>

@@ -7,6 +7,9 @@ namespace Blazor_TaskManager.Components.TaskCategory;
 
 public partial class TaskCategory
 {
+    [SupplyParameterFromForm]
+    public Category Category { get; set; } = new();
+
     private IEnumerable<Category> _categories;
 
     [Inject]
@@ -23,5 +26,11 @@ public partial class TaskCategory
     {
         var allCategories = await _categoryService.GetAllCategoryAsync();
         _categories = allCategories.Where(cat => cat.Name.Contains(categoryFilter));
+    }
+
+
+    public async Task AddNewCatgory()
+    {
+        _categoryService.AddCategoryAsync(Category);
     }
 }
