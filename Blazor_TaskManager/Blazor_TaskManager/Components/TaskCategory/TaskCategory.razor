@@ -1,6 +1,7 @@
 ﻿
 @page "/categories"
 @using Microsoft.AspNetCore.Components.QuickGrid
+@rendermode InteractiveServer
 
 <div class="row">
     <div class="d-flex justify-content-end">
@@ -14,27 +15,23 @@
 <div class="card shadow-lg p-3 mt-3">
     <div class="card-body">
 
-        <table class="table table-sm table-striped table-hover" id="CategoryIndexTable">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Category</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @{int sn = 1;}
-                @foreach (var cat in _categories)
-                {
-                    <tr>
-                        <td>@{sn++;}</td>
-                        <td>@cat.Name</td>
-                        <td></td>
-                    </tr>
-                }
+        <QuickGrid id="firstTable" Items="_categories.AsQueryable()" Pagination="categoryTablePaginationState"
+                   class="table table-sm table-striped table-hover">
+            <PropertyColumn Property="c => c.Name" Title="Category Name" Sortable="true">
+                <ColumnOptions>
+                    <input class="form-control"
+                           type="search" @bind="categoryFilter" @bind:event="oninput" autofocus placeholder="Category Name..."/>
+                </ColumnOptions>
+            </PropertyColumn>
 
-            </tbody>
-        </table>
+            <TemplateColumn Context="c">
+                <button type="button" class="btn btn-sm btn-outline-primary">Edit</button>
+                <button type="button" class="btn btn-sm btn-outline-danger">Delete</button>
+            </TemplateColumn>
+        </QuickGrid>
+        <Paginator State="categoryTablePaginationState">
+        </Paginator>
+
     </div>
 </div>
 
@@ -58,3 +55,4 @@
         </div>
     </div>
 </div>
+
