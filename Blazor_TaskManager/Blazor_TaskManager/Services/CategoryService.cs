@@ -7,7 +7,7 @@ namespace Blazor_TaskManager.Services;
 public class CategoryService : ICategoryService
 {
     private readonly TaskManagerDbContext _dbContext;
-    private List<Category> _categories; 
+    private List<Category> _categories = new(); 
     public CategoryService(TaskManagerDbContext dbContext)
     {
         _dbContext = dbContext;

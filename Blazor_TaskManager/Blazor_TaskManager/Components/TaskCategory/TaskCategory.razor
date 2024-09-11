@@ -1,5 +1,6 @@
 ﻿
 @page "/categories"
+@using Microsoft.AspNetCore.Components.QuickGrid
 
 <div class="row">
     <div class="d-flex justify-content-end">
@@ -12,6 +13,7 @@
 
 <div class="card shadow-lg p-3 mt-3">
     <div class="card-body">
+
         <table class="table table-sm table-striped table-hover" id="CategoryIndexTable">
             <thead>
                 <tr>
@@ -21,11 +23,16 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+                @{int sn = 1;}
+                @foreach (var cat in _categories)
+                {
+                    <tr>
+                        <td>@{sn++;}</td>
+                        <td>@cat.Name</td>
+                        <td></td>
+                    </tr>
+                }
+
             </tbody>
         </table>
     </div>
