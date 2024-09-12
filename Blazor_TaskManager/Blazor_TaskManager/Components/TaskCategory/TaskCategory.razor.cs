@@ -29,7 +29,7 @@ public partial class TaskCategory
     }
 
 
-    public async Task AddNewCatgory()
+    public async Task AddCatgory()
     {
         _categoryService.AddCategoryAsync(Category);
     }
