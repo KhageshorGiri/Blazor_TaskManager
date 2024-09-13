@@ -7,9 +7,7 @@ namespace Blazor_TaskManager.Components.TaskCategory;
 
 public partial class TaskCategory
 {
-    [SupplyParameterFromForm]
-    public Category Category { get; set; } = new();
-
+   
     private IEnumerable<Category> _categories;
 
     [Inject]
@@ -28,9 +26,14 @@ public partial class TaskCategory
         _categories = allCategories.Where(cat => cat.Name.Contains(categoryFilter));
     }
 
+    [SupplyParameterFromForm]
+    public Category Category { get; set; } = new();
 
     public async Task AddCatgory()
     {
-        _categoryService.AddCategoryAsync(Category);
+        //_categoryService.AddCategoryAsync(Category);
+
+        // Reset the form fields by reinitializing the Category object
+        Category = new Category();
     }
 }

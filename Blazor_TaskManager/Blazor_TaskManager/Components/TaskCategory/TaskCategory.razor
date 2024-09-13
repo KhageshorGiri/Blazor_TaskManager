@@ -3,7 +3,7 @@
 @using Microsoft.AspNetCore.Components.QuickGrid
 @rendermode InteractiveServer
 
-<div class="row">
+@* <div class="row">
     <div class="d-flex justify-content-end">
         <button type="button" id="addNewCategoryBtn" class="btn btn-sm btn-primary"
                 data-bs-toggle="modal" data-bs-target="#addNewCategoryModel">
@@ -11,6 +11,42 @@
         </button>
     </div>
 </div>
+ *@
+
+<div class="card shadow-lg p-3 mt-3">
+    <div class="card-header">
+        <h5> <i class="bi bi-plus-circle"></i>  Add New Category </h5>
+    </div>
+    <div class="card-body">
+        <EditForm method="post" Model="Category" OnValidSubmit="@AddCatgory" FormName="AddNewCategory">
+            <DataAnnotationsValidator />
+          @*   <ValidationSummary class="text-danger" />
+ *@
+            <div class="row">
+                <!-- Category Name Field -->
+                <div class="form-group col-md-6">
+                    <label for="name" class="form-label">Category Name</label>
+                    <div class="input-group">
+                        <InputText id="name" @bind-Value="Category.Name" class="form-control" placeholder="Enter category name" />
+                    </div>
+                    <ValidationMessage For="() => Category.Name" class="text-danger mt-2" />
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="form-group col-md-6 d-flex align-items-center justify-content-start mt-4">
+                    <button type="submit" class="btn btn-success btn-sm me-2 shadow-sm">
+                        <i class="fas fa-save me-1"></i> Save
+                    </button>
+                    <button type="reset" class="btn btn-secondary btn-sm shadow-sm">
+                        <i class="fas fa-undo-alt me-1"></i> Clear
+                    </button>
+                </div>
+            </div>
+            
+        </EditForm>
+    </div>
+</div>
+
 
 <div class="card shadow-lg p-3 mt-3">
     <div class="card-body">
@@ -46,19 +82,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <EditForm method="post" Model="Category" OnInvalidSubmit="AddCatgory" FormName="AddNewCategory" Enhance>
-                    <DataAnnotationsValidator />
-                    <ValidationSummary class="text-danger"/>
-                    <div class="form-group">
-                        <label for="name" class="form-label">Category Name</label>
-                        <InputText id="name" @bind-Value="Category.Name" class="form-control" />
-                        <ValidationMessage For="() => Category.Name" class="text-danger"/>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-sm btn-success">Save</button>
-                        <button type="reset" class="btn btn-sm btn-secondary">clear</button>
-                    </div>
-                </EditForm>
+              
             </div>
            
         </div>
