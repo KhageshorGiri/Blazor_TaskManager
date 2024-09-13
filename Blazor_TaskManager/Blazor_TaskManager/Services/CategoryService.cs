@@ -38,7 +38,7 @@ public class CategoryService : ICategoryService
         throw new NotImplementedException();
     }
 
-    public Task<Category> UpdateCategoryAsync(int id, Category category)
+    public Task<Category> UpdateCategoryAsync(Category category)
     {
         throw new NotImplementedException();
     }

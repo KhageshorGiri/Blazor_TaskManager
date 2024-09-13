@@ -3,16 +3,6 @@
 @using Microsoft.AspNetCore.Components.QuickGrid
 @rendermode InteractiveServer
 
-@* <div class="row">
-    <div class="d-flex justify-content-end">
-        <button type="button" id="addNewCategoryBtn" class="btn btn-sm btn-primary"
-                data-bs-toggle="modal" data-bs-target="#addNewCategoryModel">
-            <i class="bi bi-plus-circle"></i>  Add New Category
-        </button>
-    </div>
-</div>
- *@
-
 <div class="card shadow-lg p-3 mt-3">
     <div class="card-header">
         <h5> <i class="bi bi-plus-circle"></i>  Add New Category </h5>
@@ -61,7 +51,10 @@
             </PropertyColumn>
 
             <TemplateColumn Context="c">
-                <button type="button" class="btn btn-sm btn-outline-primary">Edit</button>
+                <button type="button" class="btn btn-sm btn-outline-primary" @onclick="() => EditCategory(c)"
+                        data-bs-toggle="modal" data-bs-target="#addNewCategoryModel">
+                    Edit
+                </button>
                 <button type="button" class="btn btn-sm btn-outline-danger">Delete</button>
             </TemplateColumn>
         </QuickGrid>
@@ -78,11 +71,18 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="addNewCategoryModelLabel"> <i class="bi bi-plus-circle"></i> Add New Category</h1>
+                <h1 class="modal-title fs-5" id="addNewCategoryModelLabel"> Edit Category</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              
+                <!-- Form for editing category -->
+                <div class="mb-3">
+                    <label for="categoryName" class="form-label">Category Name</label>
+                    <input type="text" class="form-control" id="categoryName" @bind="selectedCategory.Name">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-success" @onclick="@SaveCategory">Save changes</button>
             </div>
            
         </div>
