@@ -10,8 +10,7 @@ Ensure you have the following installed:
 ## Installation
 1. **Clone the repository:**
    ```bash
-  https://github.com/KhageshorGiri/Blazor_TaskManager.git
-
+   https://github.com/KhageshorGiri/Blazor_TaskManager.git
 
 **Thank You**
 
