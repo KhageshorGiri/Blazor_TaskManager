@@ -26,6 +26,9 @@ public class TaskItem
     public DateTime? DueDate { get; set; }
 
 
+    [DataType(DataType.DateTime)]
+    public DateTime? UpdateDate { get; set; }
+
     [ForeignKey(nameof(Category))]
     public int CategoryId { get; set; }
     public Category Category { get; set; }

@@ -9,6 +9,15 @@ public partial class AddTaskItem
 {
     [Inject]
     private ICategoryService _categoryService { get; set; }
+
+
+    [Inject]
+    private ITaskService _taskService { get; set; }
+
+    [Inject]
+    private NavigationManager Navigation { get; set; }
+
+
     private IEnumerable<Category> _categories = new List<Category>();
 
     protected override async Task OnInitializedAsync()
@@ -23,9 +32,9 @@ public partial class AddTaskItem
     // Handle valid form submission
     private async Task HandleValidSubmit()
     {
-        // Save the taskModel to the server or perform any action
-        // For now, just display a message
-        Console.WriteLine("Form submitted successfully!");
+        TaskItem.UpdateDate = DateTime.Now;
+        await _taskService.AddTaskItemAsync(TaskItem);
+        Navigation.NavigateTo("/task-items");
     }
 
 

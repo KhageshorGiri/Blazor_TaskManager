@@ -1,8 +1,81 @@
 ﻿@page "/"
 @attribute [Authorize]
+@rendermode InteractiveServer
 
 <PageTitle>Home</PageTitle>
 
-<h1>Hello, world!</h1>
+<div class="row mb-3 mt-2">
+    <div class="text-center">
+        <h2>Welcome back !!</h2>
+        <h5>@CurrentDateTime</h5>
+    </div>
+</div>
 
-Welcome to your new app.
+<hr class="bg-info my-4"/>
+
+<div class="row">
+    <div class="col-md-3 px-2">
+        <div class="card shadow-lg p-2 bg-info">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>Tasked opened</h4>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <h5>@TotalOpened</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-md-3 px-2">
+        <div class="card shadow-lg p-2 bg-warning">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>Tasked InProgress</h4>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <h5>@TotalInProgress</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-md-3 px-2">
+        <div class="card shadow-lg p-2 bg-success">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>Tasked Closed</h4>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <h5>@TotalClosed</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-md-3 px-2">
+        <div class="card shadow-lg p-2 bg-secondary">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>Tasked ReOpened</h4>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <h5>@TotalReOpened</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+   
+</div>

@@ -1,5 +1,5 @@
-﻿
-@page "/task-items"
+﻿@page "/task-items"
+@using Microsoft.AspNetCore.Components.QuickGrid
 @rendermode InteractiveServer
 
 <div class="card">
@@ -8,33 +8,55 @@
     </div>
     <div class="card-body">
         <div>
-            <table class="table table-sm table-striped" id="TaskItemIndexTable">
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Priority</th>
-                        <th>Status</th>
-                        <th>DueDate</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
+
+            <QuickGrid id="TaskItemIndexTable" Items="_allTaskItems.AsQueryable()"
+                       class="table table-sm table-striped table-hover">
+                <PropertyColumn Property="t => t.Title" Title="Task Title" Sortable="true">
+                </PropertyColumn>
+
+                <TemplateColumn Context="t" Title="Priority">
+                    <span class="@GetPriorityColor(t.Priority)">@t.Priority</span>
+                </TemplateColumn>
+
+                <TemplateColumn Context="t" Title="Status">
+                    <span class="@GetStatusColor(t.Status)">@t.Status</span>
+                </TemplateColumn>
+
+                <PropertyColumn Property="t => t.DueDate" Title="Due Date" Sortable="true">
+                </PropertyColumn>
+
+                <TemplateColumn Context="c">
+                    <button type="button" class="btn btn-sm btn-outline-primary">
+                        Edit
+                    </button>
+                    <button type="button" class="btn btn-sm btn-outline-info">Details</button>
+                </TemplateColumn>
+            </QuickGrid>
+
         </div>
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="TaskItemHistoryModel" data-bs-backdrop="static"
+     data-bs-keyboard="false" tabindex="-1" aria-labelledby="TaskItemHistoryLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="TaskItemHistoryLabel">Task Item History Index</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    function showTaskHistoryModal() {
+        var modal = new bootstrap.Modal(document.getElementById('TaskItemHistoryModel'));
+        modal.show();
+    }
+</script>
