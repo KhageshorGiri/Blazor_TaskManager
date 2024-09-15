@@ -1,45 +1,78 @@
 ﻿using Blazor_TaskManager.Data;
 using Blazor_TaskManager.Entities;
 using Blazor_TaskManager.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Blazor_TaskManager.Services;
 
 public class CategoryService : ICategoryService
 {
     private readonly TaskManagerDbContext _dbContext;
-    private List<Category> _categories = new(); 
     public CategoryService(TaskManagerDbContext dbContext)
     {
         _dbContext = dbContext;
-
-        _categories.Add(new() { Id = 1, Name = "Feature" });
-        _categories.Add(new() { Id = 2, Name = "Bug" });
-        _categories.Add(new() { Id = 3, Name = "Enhancement" });
-        _categories.Add(new() { Id = 4, Name = "Report" });
-        _categories.Add(new() { Id = 5, Name = "Support" });
     }
-    public Task AddCategoryAsync(Category category)
+    public async Task AddCategoryAsync(Category category)
     {
-        throw new NotImplementedException();
+        using (var transaction = await _dbContext.Database.BeginTransactionAsync())
+        {
+            try
+            {
+                _dbContext.Categories.Add(category);
+                await _dbContext.SaveChangesAsync();
+                await transaction.CommitAsync();
+            }
+            catch(Exception ex)
+            {
+                await transaction.RollbackAsync();
+            }
+        }
     }
 
-    public Task DeleteCategoryAsync(int id)
+    public async Task DeleteCategoryAsync(int id)
     {
-        throw new NotImplementedException();
+        using (var transaction = await _dbContext.Database.BeginTransactionAsync())
+        {
+            try
+            {
+                var existingCategory = await _dbContext.Categories.FirstOrDefaultAsync(c => c.Id == id);
+                _dbContext.Categories.Remove(existingCategory);
+                await _dbContext.SaveChangesAsync();
+                await transaction.CommitAsync();
+            }
+            catch (Exception ex)
+            {
+                await transaction.RollbackAsync();
+            }
+        }
     }
 
     public async Task<IEnumerable<Category>> GetAllCategoryAsync()
     {
-        return _categories;
+        return await _dbContext.Categories.ToListAsync();
     }
 
-    public Task<Category> GetCategoryByIdAsync(int id)
+    public async Task<Category?> GetCategoryByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        return await _dbContext.Categories.FirstOrDefaultAsync(c => c.Id == id);
     }
 
-    public Task<Category> UpdateCategoryAsync(Category category)
+    public async Task<Category> UpdateCategoryAsync(Category category)
     {
-        throw new NotImplementedException();
+        using (var transaction = await _dbContext.Database.BeginTransactionAsync())
+        {
+            try
+            {
+                _dbContext.Categories.Update(category);
+                await _dbContext.SaveChangesAsync();
+                await transaction.CommitAsync();
+            }
+            catch (Exception ex)
+            {
+                await transaction.RollbackAsync();
+            }
+
+            return category;
+        }
     }
 }
