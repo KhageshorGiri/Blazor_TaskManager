@@ -40,6 +40,7 @@ builder.Services.AddIdentityCore<TaskManagerUser>(options => options.SignIn.Requ
 builder.Services.AddSingleton<IEmailSender<TaskManagerUser>, IdentityNoOpEmailSender>();
 
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ITaskService, TaskService>();
 
 
 var app = builder.Build();
