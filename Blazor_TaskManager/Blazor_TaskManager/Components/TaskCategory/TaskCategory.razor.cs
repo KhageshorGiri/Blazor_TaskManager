@@ -16,7 +16,7 @@ public partial class TaskCategory
 
     PaginationState categoryTablePaginationState = new PaginationState
     {
-        ItemsPerPage = 2
+        ItemsPerPage = 10
     };
 
     string categoryFilter = "";
@@ -38,17 +38,17 @@ public partial class TaskCategory
 
     public async Task AddCatgory()
     {
-        //_categoryService.AddCategoryAsync(Category);
+        await _categoryService.AddCategoryAsync(Category);
 
         // Reset the form fields by reinitializing the Category object
         Category = new Category();
+        await LoadCategories();
     }
 
     // Method to open the modal with selected category for editing
-    private void EditCategory(Category category)
+    private async Task EditCategory(Category category)
     {
-        selectedCategory = category;  // Set the selected category for editing
-      
+        selectedCategory = category; 
     }
 
     private async Task SaveCategory()
@@ -56,6 +56,12 @@ public partial class TaskCategory
         await _categoryService.UpdateCategoryAsync(selectedCategory);
         selectedCategory = new Category();
         await LoadCategories();  // Reload categories after the update
+    }
+
+    private async Task DeleteCategory(Category category)
+    {
+        await _categoryService.DeleteCategoryAsync(category.Id);
+        await LoadCategories();  
     }
 
 }
