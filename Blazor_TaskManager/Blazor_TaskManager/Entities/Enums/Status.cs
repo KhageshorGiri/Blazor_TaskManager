@@ -2,9 +2,9 @@
 
 public enum StatusOptionType
 {
-    Todo = 0,
-    InProgress = 1,
-    Completed = 2,
-    ReOpened = 3,
-    Rejected = 4
+    Todo = 1,
+    InProgress = 2,
+    Completed = 3,
+    ReOpened = 4,
+    Rejected = 5
 }

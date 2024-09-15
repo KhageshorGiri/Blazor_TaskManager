@@ -22,7 +22,8 @@ public class TaskItem
     public PriorityOptionType Priority { get; set; }
 
     [Required]
-    public DateTime DueDate { get; set; }
+    [DataType(DataType.DateTime)]
+    public DateTime? DueDate { get; set; }
 
 
     [ForeignKey(nameof(Category))]

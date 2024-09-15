@@ -1,6 +1,40 @@
 ﻿
 @page "/task-items"
+@rendermode InteractiveServer
 
-
-<h3>TaskItem</h3>
-
+<div class="card">
+    <div class="d-flex justify-content-end me-4 py-2">
+        <button class="btn btn-sm btn-primary" @onclick="NavigateToAddTask"> Add New Task Item</button>
+    </div>
+    <div class="card-body">
+        <div>
+            <table class="table table-sm table-striped" id="TaskItemIndexTable">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                        <th>DueDate</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -17,6 +17,8 @@ builder.Services.AddDbContext<TaskManagerDbContext>(options => options.UseSqlSer
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+builder.Services.AddServerSideBlazor();
+
 builder.Services.AddCascadingAuthenticationState();
 
 builder.Services.AddScoped<IdentityUserAccessor>();

@@ -1,0 +1,81 @@
+﻿
+@page "/add-new-task"
+@using Blazor_TaskManager.Entities.Enums
+
+
+<div class="card shadow-lg p-3 mt-3">
+    <div class="card-header">
+        <h5> <i class="bi bi-plus-circle"></i>  Add New Category </h5>
+    </div>
+    <div class="card-body">
+
+        <div>
+            <EditForm Model="@TaskItem" OnValidSubmit="@HandleValidSubmit" FormName="AddNewTaskItemForm" Enhance>
+                <DataAnnotationsValidator />
+
+                <div class="row">
+                    <!-- Title Input -->
+                    <div class="form-group col-md-12">
+                        <label for="title" class="form-label">Title</label>
+                        <InputText id="title" @bind-Value="TaskItem.Title" class="form-control" placeholder="Task Title"/>
+                        <ValidationMessage For="() => TaskItem.Title" />
+                    </div>
+
+                    <!-- Status Dropdown -->
+                    <div class="form-group col-md-6 mt-3">
+                        <label for="status" class="form-label">Status</label>
+                        <InputSelect id="status" class="form-control" @bind-Value="TaskItem.Status">
+                            <option>Select Task Status</option>
+                            @foreach (var status in Enum.GetValues(typeof(StatusOptionType)))
+                            {
+                                <option value="@status">@status</option>
+                            }
+                        </InputSelect>
+                        <ValidationMessage For="@(() => TaskItem.Status)" />
+                    </div>
+
+                    <!-- Due Date Input -->
+                    <div class="form-group col-md-6 mt-3">
+                        <label for="dueDate" class="form-label">Due Date</label>
+                        <InputDate id="dueDate" class="form-control" @bind-Value="TaskItem.DueDate" />
+                        <ValidationMessage For="@(() => TaskItem.DueDate)" />
+                    </div>
+
+                    <!-- Category Dropdown -->
+                    <div class="form-group col-md-6 mt-3">
+                        <label for="category" class="form-label">Category</label>
+                        <InputSelect id="category" class="form-control" @bind-Value="TaskItem.CategoryId">
+                            <option value="">Select Task Category</option>
+                            @foreach (var category in _categories)
+                            {
+                                <option value="@category.Id">@category.Name</option>
+                            }
+                        </InputSelect>
+                        <ValidationMessage For="@(() => TaskItem.CategoryId)" />
+                    </div>
+
+                    <!-- Priority Dropdown -->
+                    <div class="form-group col-md-6 mt-3">
+                        <label for="priority" class="form-label">Priority</label>
+                        <InputSelect id="priority" class="form-control" @bind-Value="TaskItem.Priority">
+                            <option value="">Select Task Priority</option>
+                            @foreach (var priority in Enum.GetValues(typeof(PriorityOptionType)))
+                            {
+                                <option value="@priority">@priority</option>
+                            }
+                        </InputSelect>
+                        <ValidationMessage For="@(() => TaskItem.Priority)" />
+                    </div>
+                   
+                </div>
+                <!-- Submit Button -->
+                <div class="d-flex justify-content-end mt-5">
+                    <button type="submit" class="btn btn-success">Save</button>
+                </div>
+
+            </EditForm>
+        </div>
+
+    </div>
+</div>
+
